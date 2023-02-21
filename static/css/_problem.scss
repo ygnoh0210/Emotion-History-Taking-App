@@ -1,0 +1,27 @@
+.problem-container{
+  width: 50%;
+  padding-right: 20px;
+  h2{
+    padding: 20px 0;
+    color: $blue2;
+  }
+  .problem{
+    padding: 20px;
+    margin-bottom: 20px;
+    background: $blue2;
+    color: $white;
+  }
+  .answer{
+    width: 100%;
+    height: 40px;
+    padding: 0 10px;
+  }
+}
+
+/* Small screens */
+@media all and (max-width: 767px) {
+  .problem-container{
+    width: 100%; 
+    padding: 20px;
+  }
+}

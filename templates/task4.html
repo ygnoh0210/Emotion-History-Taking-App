@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Self-Archive</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Icons">
+  <link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}">
+</head>
+<body>
+ 
+<div class="wrap">
+  <header>
+    <h1 class="logo"><a href="#">회상 하기</a></h1>
+    <h2 class="page-title">대화를 통해 퀴즈도 풀고, 기억도 회상하고</h2>
+  </header>
+  <section class="container">
+    <div class="page-control">
+      <a href="#" class="link-prev">
+        <span>이전</span>
+        <i class="material-icons">chevron_left</i>
+        
+      </a>
+      <div class="paging">1/10</div>
+      <a href="#" class="link-next">
+        <span>다음</span>
+        <i class="material-icons">chevron_right</i>
+      </a>
+    </div>
+
+    <div class="flex">
+      <article class="gallery-container">
+        <div class="scroll-area">
+          <div class="img-area">
+            <img id="img-id" src="{{ url_for('static', filename='image/1.jpg') }}" alt="유물이미지">
+          </div>
+          <div class="description">
+            <div class="title">제목 : 가족 여행 사진</div>
+            <p>등록일 : 2023.02.20</p>
+            <ul class="description-list">
+              <br>
+              <li>장소 : 등록</li>
+              <li>인물 : 등록</li>
+              <li>일시 : 미등록 </li>
+            </ul>
+            
+          </div>
+        </div>
+      </article>
+      <article class="chat-container">
+        <div class="chat-thread">
+          <ul class="chat-list">
+            <li class="chatbot">
+              <span class="material-icons">smart_toy</span>
+              장소는 어디였는지 궁금해요. 알려주실 수 있나요?
+            </li>
+          </ul>
+        </div>
+        <div class="chat-input">
+          <input type="text" id="question-text" placeholder="답변을 입력하세요.">
+          <button id="btn-question">답변하기</button>
+        </div>
+      </article>
+    </div>
+  </section>
+</div>
+  <!-- <footer>@ Soft Computing & Interaction Lab. | GIST</footer> -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" referrerpolicy="no-referrer"></script>
+  <script src="../static/js/jquery-1.11.2.js"></script>
+  <script src="js/chat.js"></script>
+  <script>
+
+
+    const question  = function() {
+      const question = $('#question-text').val();
+      const title = $('.title').text();
+      if (question.length > 0) {
+        $('.chat-list').append(`
+      <li class="me">
+        <span class="material-icons">face</span>
+        ${question}
+      </li>
+    `)
+        $(".chat-thread").animate({scrollTop: $('.chat-list').height()}, 1000);
+      $.ajax({
+        type: 'POST',
+        async: false,                                
+        url: '/get_answer',
+        data: {
+          'question_id': question,
+          'title': title
+        },
+        dataType: 'text',
+        success: function (result) {
+          // alert("result = " + result);
+          answer(result)    // 답변 출력 (result == 답변 내용)
+        },
+        error: function (xtr, status, error) {
+          alert(xtr + ":" + status + ":" + error);
+        }
+
+      });
+
+      }
+
+    }
+
+    const answer = function(bot_answer){
+    const answer = bot_answer//{{bot_answer|tojson}};
+    if(answer.length > 0){
+      $('.chat-list').append(`
+        <li class="chatbot">
+            <span class="material-icons">smart_toy</span>
+            ${answer}
+        </li>
+        `)
+      $('#question-text').val('')     // 텍스트 입력창 내용 지우기
+    }
+    $(".chat-thread").animate({ scrollTop: $('.chat-list').height() }, 1000);
+  }
+
+  $('#btn-question').on({
+  click: question,
+  // mouseup: question,
+  keyup:function(key) {
+    if(key.keyCode==13) {
+      question()
+    }
+  }
+  });
+
+  $('#question-text').on({
+  keyup:function(key) {
+    if(key.keyCode==13) {
+      question()
+    }
+  }
+  });
+
+  $('.logo').on('click',function(e){
+    e.preventDefault();
+    const result=confirm('메인으로 가시겠습니까?')
+    if(result){
+      location.href='main.html'
+    }
+  })
+
+    $('.link-prev').on('click',function(e){
+    e.preventDefault();
+    const paging = $('.paging').text();
+    if(paging !== '1/10') {
+      $.ajax({
+        type: 'POST',
+        async: false,                                 
+        url: '/prev_paging',
+        data: {'paging': paging},
+        dataType: 'json',
+        success: function (result) {
+          loadpaging(result);
+        },
+        error: function (xtr, status, error) {
+          alert(xtr + ":" + status + ":" + error);
+        }
+      });
+    }
+  })
+
+  $('.link-next').on('click',function(e){
+    e.preventDefault();
+    const paging = $('.paging').text();
+    if(paging !== '10/10'){$.ajax({
+        type: 'POST',
+        async: false,                                  
+        url: '/next_paging',
+        data: {'paging': paging},
+        dataType: 'json',
+        success: function (result) {loadpaging(result);},
+        error: function (xtr, status, error) {alert(xtr + ":" + status + ":" + error);}
+      });
+    }
+    else{
+
+      const result=confirm('마지막 해설입니다. 메인으로 돌아가서 \'2.지정태스크\'를 수행해주세요.')
+      if(result) {
+        location.href = 'main.html'
+      }
+    }
+  })
+
+    const loadpaging = function(result){
+    $('.description-list').empty();
+    $('.paging').text(result['paging']);
+    $('#img-id').attr("src", result['img_url']);
+    $('.title').text(result['title']);
+    for(var i=0; i<result['li'].length; i++){
+      const li_item = result['li'][i].replaceAll("-", "");
+       $('.description-list').append(`
+      <li> ${li_item}</li>
+    `)
+    }
+    $('.text-area').text(result['text-area']);
+    }
+
+
+
+  </script>
+</body>
+</html>

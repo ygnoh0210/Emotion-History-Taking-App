@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Self-Archive</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Icons">
+  <link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}">
+</head>
+<body class="start">
+  <form action="" method="post" >
+        <h1 style="padding-top: 0px;">추억 서랍</h1>
+        <br>
+        <h2 style="padding-bottom:20px;">대화를 통해 나를 기록해보세요</h2>
+
+        <br><br>
+        <hr>
+        <br><br><br><br>
+          <p class="msg" >  사용자 정보를 입력해주세요  </p>
+          <input type="text" name="username" placeholder="이름을 입력해 주세요"/><br>
+          <input type="text" name="birth" placeholder="생년월일을 입력해 주세요"/><br>
+          <input type="text" name="birth" placeholder="비밀번호를 입력해 주세요"/><br>
+          <input type="text" name="birth" placeholder="비밀번호를 다시 한번 입력해 주세요"/><br>
+          <div class="gender">
+            <input id="gender_man" type="radio" name="gender">남성
+            <input id="gender_woman" type="radio" name="gender">여성
+          </div>
+          </div>
+
+          <button type="button" style="width:30%" onclick="location.href='index.html';">가입 하기</button>
+
+  </form>
+  <footer class="fixed">@ Soft Computing & Interaction Lab. | GIST</footer>
+</body>
+</html>

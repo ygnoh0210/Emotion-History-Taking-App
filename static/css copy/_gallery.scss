@@ -1,0 +1,45 @@
+.gallery-container{
+  width: 50%;
+  border: 1px solid $gray;
+  height: 100%;
+  padding: 10px 10px 10px 10px;
+  .scroll-area{
+    height: 100%;
+    overflow-y: auto;
+    padding-right: 10px;
+    line-height: 1.5;
+  }
+  .img-area{
+    img{
+      display: block;
+      width: 100%;
+    }
+  }
+  .description{
+    height: 300px;
+    .title{
+      font-size: 1.5em;
+      font-weight: 700;
+      padding: 10px 0;
+    }
+    ul{
+      padding: 20px;
+    }
+    .text-area{
+
+    }
+  }
+}
+
+/* Small screens */
+@media all and (max-width: 767px) {
+  .gallery-container{
+    width: 100%; 
+    .scroll-area{
+      padding: 0;
+    }
+    .description{
+      height: auto;
+    }
+  }
+}

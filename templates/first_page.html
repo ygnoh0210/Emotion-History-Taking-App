@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Self-Archive</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Icons">
+  <link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}">
+</head>
+<body class="start">
+  <form action="" method="post">
+        <header class="top-banner">
+        <h1 >추억 서랍</h1>
+        <br>
+        <h2>대화를 통해 나를 기록해보세요</h2>
+      </header>
+
+    <br><br>
+    <hr>
+    <br><br><br><br>
+
+          <p class="msg" >"추억 서랍을 사용해보신 적 있으신가요?"</p>
+          <br>
+          <p class="msg">🙆🏻 네, 사용해봤어요.</p>
+          <button type="button" style="width:30%" onclick="location.href='login.html';">로그인 하기</button>
+
+          <br>
+          <p class="msg">🙅🏻‍♂️ 아니요, 처음이에요.</p>
+    <button type="button" style="width:30%" onclick="location.href='explain.html';">가입 하기</button>
+
+  </form>
+  <footer class="fixed">@ Soft Computing & Interaction Lab. | GIST</footer>
+</body>
+</html>

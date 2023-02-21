@@ -1,0 +1,33 @@
+.login{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0 20px;
+  }
+  h1{
+    color: $blue2;
+    font-size: 2em;
+  }
+  .msg{
+    margin: 50px 0;
+    color:$dark-gray;
+    font-weight: bold;
+  }
+  input[type=text]{
+    width: 100%;
+    height: 40px;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  button{
+    width: 100%;
+    height: 40px;
+    background: $blue2;
+    color: $white;
+    border: none;
+  }
+}

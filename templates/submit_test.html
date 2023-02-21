@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<body>
+    <h1> 국립광주박물관 아시아도자실 신안해저도자</h1><br>
+    <form method="GET" action="/calculate">
+        <div>
+            <p>
+                유물 해설.....ss....<br>
+                유물 해설.........<br>
+                유물 해설.........<br>
+                유물 해설.........<br>
+                나는 챗봇이다............<br>
+                GIST SCI LAB :)<br>
+                CHI CHI CHI CHI CHI<br><br>
+            </p>
+        </div>
+        <div>
+            <label> 위 해설을 읽고 궁금한 점을 챗봇에게 물어보세요 :)<br></label>
+        </div>
+        <div>
+            <label for='username'> 사용자 이름을 입력하세요 </label>
+            <input type="text" name="username">
+        </div>
+        <div>
+            <label for='question'> 질문입력란 </label>
+            <input type="text" name="question"><button type="submit">질문하기</button>
+        </div>
+    </form>
+    <div>
+        <p>
+            {% if question == None %}
+                <h5> 질문을 입력하고 '질문하기'를 누르면 챗봇이 답변합니다. </h5>
+            {% else %}
+                <p> 나의 질문: {{question}} </p>
+                <p>
+                    챗봇 답변: {{answer}}
+                </p>
+            {% endif %}
+        </p>
+    </div>
+</body>
+</html>

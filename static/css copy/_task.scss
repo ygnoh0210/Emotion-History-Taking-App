@@ -1,0 +1,48 @@
+.task-container{
+  h2{
+    padding: 50px 0 20px;
+    color: $dark-gray;
+    text-align: center;
+    &::before,&::after{
+      content: '-';
+      padding: 0 10px;
+    }
+  }
+  .task-choice{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    a{
+      display: block;
+      width: 49%;
+      padding: 10px;
+      color: $white;
+      text-align: center;
+      border-radius: 10px;
+      &.link-task1{
+        background: $blue2;
+      }
+      &.link-task2{
+        background: $blue3;
+      }
+    }
+    dt{ 
+      font-size: 1.5em;
+      font-weight: 700;
+      padding-bottom: 10px;
+    }
+    dd{
+      line-height: 1.5;
+    }
+  }
+}
+
+
+@media all and (max-width: 765px){
+  .task-container .task-choice{
+    a{
+      width: 100%;
+      margin-bottom: 10px;
+    }
+  }
+}
